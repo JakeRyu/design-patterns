@@ -25,20 +25,15 @@ namespace SRP
             return string.Join(Environment.NewLine, entries);
         }
 
-        // breaks single responsibility principle
-        public void Save(string filename, bool overwrite = false)
-        {
-            File.WriteAllText(filename, ToString());
-        }
+    }
 
-        public void Load(string filename)
+    // handles the responsibility of persisting objects
+    class Persistence
+    {
+        public void SaveToFile(Journal journal, string filename, bool overwrite = false)
         {
-
-        }
-
-        public void Load(Uri uri)
-        {
-            
+            if(overwrite || !File.Exists(filename))
+                File.WriteAllText(filename, journal.ToString());
         }
     }
     class Program
