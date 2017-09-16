@@ -97,6 +97,15 @@ namespace OCP
             {
                 WriteLine($" - {p.Name} is green");
             }
+
+            // Add combination filter
+            WriteLine("Large blue item:");
+            foreach(var p in bf.Filter(products, new AndSpecification(
+                new ColourSpecification(Colour.Blue),
+                new SizeSpecification(Size.Large))))
+            {
+                WriteLine($" - {p.Name} is big and blue");
+            }
         }
     }
 }

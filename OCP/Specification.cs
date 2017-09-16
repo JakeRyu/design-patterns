@@ -1,3 +1,5 @@
+using System;
+
 namespace OCP
 {
     public interface ISpecification<T>
@@ -27,6 +29,22 @@ namespace OCP
         public bool IsSatisfied(Product t)
         {
             return t.Colour == colour;
+        }
+    }
+
+    public class AndSpecification : ISpecification<Product>
+    {
+        private readonly ISpecification<Product> firstSpec, secondSpec;
+
+        public AndSpecification(ISpecification<Product> firstSpec,
+            ISpecification<Product> secondSpec)
+        {
+            this.firstSpec = firstSpec ?? throw new ArgumentNullException(paramName: nameof(firstSpec));
+            this.secondSpec = secondSpec ?? throw new ArgumentNullException(paramName: nameof(secondSpec)) ;
+        }
+        public bool IsSatisfied(Product t)
+        {
+            return firstSpec.IsSatisfied(t) && secondSpec.IsSatisfied(t);
         }
     }
 }
