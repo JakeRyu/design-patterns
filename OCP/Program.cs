@@ -67,7 +67,7 @@ namespace OCP
 
             Product[] products = { apple, tree, house };
 
-            WriteLine("Large products: ");
+            WriteLine("Large products (old method):");
 
             var pf = new ProductFilter();
             foreach(var p in pf.FilterBySize(products, Size.Large))
@@ -75,16 +75,12 @@ namespace OCP
                 WriteLine($" - {p.Name} is large");
             }
 
-            foreach(var p in pf.FilterByColour(products, Colour.Green))
+            WriteLine("Large products (new method):");
+            var bf = new BetterFilter();
+            foreach(var p in bf.Filter(products, new SizeSpecification(Size.Large)))
             {
-                WriteLine($" - {p.Name} is green");
-            }
-
-            foreach(var p in pf.FilterByColourAndSize(products, Colour.Green, Size.Large))
-            {
-                WriteLine($" - {p.Name} is green and large");
-            }
-                
+                WriteLine($" - {p.Name} is large");
+            }           
         }
     }
 }
