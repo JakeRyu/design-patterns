@@ -80,7 +80,23 @@ namespace OCP
             foreach(var p in bf.Filter(products, new SizeSpecification(Size.Large)))
             {
                 WriteLine($" - {p.Name} is large");
-            }           
+            }   
+
+            // See how easy to add a new filter of colour.
+            // The filter stays the same, add a new specification.
+            // Open to extenstion by add a new specification,
+            // close to modification to filter and specification.
+            WriteLine("Green products (old method):");
+            foreach(var p in pf.FilterByColour(products, Colour.Green))
+            {
+                WriteLine($" - {p.Name} is green");
+            }    
+
+            WriteLine("Green products (new method):");
+            foreach(var p in bf.Filter(products, new ColourSpecification(Colour.Green)))     
+            {
+                WriteLine($" - {p.Name} is green");
+            }
         }
     }
 }
